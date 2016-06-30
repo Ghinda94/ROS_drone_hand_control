@@ -5,7 +5,8 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "droneTakeOffandLand");
+  
+  ros::init(argc, argv, "droneTakeOffandLand");
 
   ros::NodeHandle n;
 
@@ -13,7 +14,7 @@ int main(int argc, char **argv)
 
   ros::Publisher droneLand_pub = n.advertise<std_msgs::Empty>("ardrone/land", 1000);
 
-  ros::Rate loop_rate(50);
+  ros::Rate loop_rate(10);
 
   std_msgs::Empty msg;
 

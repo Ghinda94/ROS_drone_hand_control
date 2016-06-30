@@ -198,3 +198,7 @@ add_dependencies(droneLand ROS_drone_hand_control_generate_messages_cpp)
 add_executable(droneTakeOffandLand src/droneTakeOffandLand.cpp)
 target_link_libraries(droneTakeOffandLand ${catkin_LIBRARIES})
 add_dependencies(droneTakeOffandLand ROS_drone_hand_control_generate_messages_cpp)
+
+add_executable(droneKeyboardControl src/droneKeyboardControl.cpp)
+target_link_libraries(droneKeyboardControl ${catkin_LIBRARIES})
+add_dependencies(droneKeyboardControl ROS_drone_hand_control_generate_messages_cpp)
