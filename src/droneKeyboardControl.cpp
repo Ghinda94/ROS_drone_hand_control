@@ -121,6 +121,32 @@ int main(int argc, char **argv)
   			droneKeyBoardControl_pub.publish(msg);
   			break;
   		}
+  		case 'c': // clockwise rotation
+  		{
+  			msg.linear.x = 0.0;
+  			msg.linear.y = 0.0;
+  			msg.linear.z = 0.0;
+
+  			msg.angular.x = 0.0;
+  			msg.angular.y = 0.0;
+  			msg.angular.z = -1.0;
+
+  			droneKeyBoardControl_pub.publish(msg);
+  			break;
+  		}
+  		case 'v': // clockwise rotation
+  		{
+  			msg.linear.x = 0.0;
+  			msg.linear.y = 0.0;
+  			msg.linear.z = 0.0;
+
+  			msg.angular.x = 0.0;
+  			msg.angular.y = 0.0;
+  			msg.angular.z = 1.0;
+
+  			droneKeyBoardControl_pub.publish(msg);
+  			break;
+  		}
   		case 't': // takeoff
     	{
     		droneTakeOff_pub.publish(msg_takeoff_land);
