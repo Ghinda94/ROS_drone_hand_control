@@ -30,7 +30,7 @@ int main(int argc, char **argv)
   	cin.get(c);
   	switch(c)
   	{
-  		case 'f':
+  		case 'w': // fly forward
   		{
   			msg.linear.x = 1.0;
   			msg.linear.y = 0.0;
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
   			droneKeyBoardControl_pub.publish(msg);
   			break;
   		}
-  		case 'b':
+  		case 's': // fly backward
   		{
   			msg.linear.x = -1.0;
   			msg.linear.y = 0.0;
@@ -56,7 +56,33 @@ int main(int argc, char **argv)
   			droneKeyBoardControl_pub.publish(msg);
   			break;
   		}
-  		case 's':
+  		case 'a': // fly to left
+  		{
+  			msg.linear.x = 0.0;
+  			msg.linear.y = 1.0;
+  			msg.linear.z = 0.0;
+
+  			msg.angular.x = 0.0;
+  			msg.angular.y = 0.0;
+  			msg.angular.z = 0.0;
+
+  			droneKeyBoardControl_pub.publish(msg);
+  			break;
+  		}
+  		case 'd': // fly to right
+  		{
+  			msg.linear.x = 0.0;
+  			msg.linear.y = -1.0;
+  			msg.linear.z = 0.0;
+
+  			msg.angular.x = 0.0;
+  			msg.angular.y = 0.0;
+  			msg.angular.z = 0.0;
+
+  			droneKeyBoardControl_pub.publish(msg);
+  			break;
+  		}
+  		case 'q': // stop
   		{
   			msg.linear.x = 0.0;
   			msg.linear.y = 0.0;
@@ -69,12 +95,38 @@ int main(int argc, char **argv)
   			droneKeyBoardControl_pub.publish(msg);
   			break;
   		}
-  		case 't':
+  		case 'z': // fly up
+  		{
+  			msg.linear.x = 0.0;
+  			msg.linear.y = 0.0;
+  			msg.linear.z = 1.0;
+
+  			msg.angular.x = 0.0;
+  			msg.angular.y = 0.0;
+  			msg.angular.z = 0.0;
+
+  			droneKeyBoardControl_pub.publish(msg);
+  			break;
+  		}
+  		case 'x': // fly down
+  		{
+  			msg.linear.x = 0.0;
+  			msg.linear.y = 0.0;
+  			msg.linear.z = -1.0;
+
+  			msg.angular.x = 0.0;
+  			msg.angular.y = 0.0;
+  			msg.angular.z = 0.0;
+
+  			droneKeyBoardControl_pub.publish(msg);
+  			break;
+  		}
+  		case 't': // takeoff
     	{
     		droneTakeOff_pub.publish(msg_takeoff_land);
     		break;
     	}
-    	case 'l':
+    	case 'l': // land
     	{
     		droneLand_pub.publish(msg_takeoff_land);
     		break;
