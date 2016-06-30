@@ -189,3 +189,8 @@ catkin_package(
 add_executable(droneTakeOff src/droneTakeOff.cpp)
 target_link_libraries(droneTakeOff ${catkin_LIBRARIES})
 add_dependencies(droneTakeOff ROS_drone_hand_control_generate_messages_cpp)
+
+
+add_executable(droneLand src/droneLand.cpp)
+target_link_libraries(droneLand ${catkin_LIBRARIES})
+add_dependencies(droneLand ROS_drone_hand_control_generate_messages_cpp)
