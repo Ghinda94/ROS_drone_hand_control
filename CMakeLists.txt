@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -202,3 +203,7 @@ add_dependencies(droneTakeOffandLand ROS_drone_hand_control_generate_messages_cp
 add_executable(droneKeyboardControl src/droneKeyboardControl.cpp)
 target_link_libraries(droneKeyboardControl ${catkin_LIBRARIES})
 add_dependencies(droneKeyboardControl ROS_drone_hand_control_generate_messages_cpp)
+
+add_executable(tfListener src/tfListener.cpp)
+target_link_libraries(tfListener ${catkin_LIBRARIES})
+add_dependencies(tfListener ROS_drone_hand_control_generate_messages_cpp)
