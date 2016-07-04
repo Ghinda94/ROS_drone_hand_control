@@ -9,10 +9,10 @@ int main(int argc, char** argv)
 
 	ros::NodeHandle node;
 
-	ros::Publisher left_hand_joint = node.advertise<geometry_msgs::Point>("left_hand_joint", 1);
+	ros::Publisher left_hand_joint = node.advertise<geometry_msgs::Point>("left_hand_joint", 1000);
 
 	tf::TransformListener listener;
-
+	
 	ros::Rate rate(50.0); // frequency of operation
 
 	while (node.ok())
