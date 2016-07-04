@@ -208,10 +208,6 @@ add_executable(tfListener src/tfListener.cpp)
 target_link_libraries(tfListener ${catkin_LIBRARIES})
 add_dependencies(tfListener ROS_drone_hand_control_generate_messages_cpp)
 
-add_executable(droneHandControl src/droneHandControl.cpp)
-target_link_libraries(droneHandControl ${catkin_LIBRARIES})
-add_dependencies(droneHandControl ROS_drone_hand_control_generate_messages_cpp)
-
-add_executable(testSP src/testSP.cpp)
-target_link_libraries(testSP ${catkin_LIBRARIES})
-add_dependencies(testSP ROS_drone_hand_control_generate_messages_cpp)
+add_executable(droneHandControlTakeoffAndLand src/droneHandControlTakeoffAndLand.cpp)
+target_link_libraries(droneHandControlTakeoffAndLand ${catkin_LIBRARIES})
+add_dependencies(droneHandControlTakeoffAndLand ROS_drone_hand_control_generate_messages_cpp)
