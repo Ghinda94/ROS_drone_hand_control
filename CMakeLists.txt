@@ -223,3 +223,7 @@ add_dependencies(droneFlyFwdBwd ROS_drone_hand_control_generate_messages_cpp)
 add_executable(rightHandJointListener src/rightHandJointListener.cpp)
 target_link_libraries(rightHandJointListener ${catkin_LIBRARIES})
 add_dependencies(rightHandJointListener ROS_drone_hand_control_generate_messages_cpp)
+
+add_executable(droneRotate src/droneRotate.cpp)
+target_link_libraries(droneRotate ${catkin_LIBRARIES})
+add_dependencies(droneRotate ROS_drone_hand_control_generate_messages_cpp)
