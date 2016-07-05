@@ -15,14 +15,14 @@ public:
     land_pub = n.advertise<std_msgs::Empty>("ardrone/land", 1000);
 
     //Topic you want to subscribe
-    sub = n.subscribe("left_hand_joint", 1000, &SubscribeAndPublish::callback, this);
+    sub = n.subscribe("torso_joint", 1000, &SubscribeAndPublish::callback, this);
   }
 
   void callback(const geometry_msgs::Point &point)
   {
     std_msgs::Empty msg;
 
-  	if(point.y > 0.0)
+  	if(point.y < 0.0)
   	{
   		takeoff_pub.publish(msg);
   	}	
