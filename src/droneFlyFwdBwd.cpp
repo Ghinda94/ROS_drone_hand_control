@@ -3,6 +3,7 @@
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/Point.h>
 #include <iostream>
+#include <cmath>
 
 class SubscribeAndPublish
 {
@@ -14,15 +15,26 @@ public:
 
     //Topic you want to subscribe
     sub = n.subscribe("torso_joint", 1000, &SubscribeAndPublish::callback, this);
+
+    firstTime = true;
   }
 
   void callback(const geometry_msgs::Point &point)
   {
     geometry_msgs::Twist msg;
 
-  	if(point.z > -1.5)
-  	{
-  		  msg.linear.x = 1.0;
+    if(firstTime)
+    {
+      actualPos = point.z;
+      firstTime = false;
+    }
+    else
+    {
+      float diff = 0.0;
+      diff = point.z - actualPos;
+      if(diff > 0.01) // move forward
+      {
+        msg.linear.x = 1.0;
         msg.linear.y = 0.0;
         msg.linear.z = 0.0;
 
@@ -31,19 +43,38 @@ public:
         msg.angular.z = 0.0;
 
         flyFwdBwd_pub.publish(msg);
-  	}	
-  	else
-  	{
-  		  msg.linear.x = -1.0;
-        msg.linear.y = 0.0;
-        msg.linear.z = 0.0;
 
-        msg.angular.x = 0.0;
-        msg.angular.y = 0.0;
-        msg.angular.z = 0.0;
+        actualPos = point.z;
+      }
+      else
+      {
+        if(diff < -0.01) // move backward
+        {
+          msg.linear.x = -1.0;
+          msg.linear.y = 0.0;
+          msg.linear.z = 0.0;
 
-        flyFwdBwd_pub.publish(msg);
+          msg.angular.x = 0.0;
+          msg.angular.y = 0.0;
+          msg.angular.z = 0.0;
 
+          flyFwdBwd_pub.publish(msg);
+
+          actualPos = point.z;
+        }
+        else // stop!
+        {
+          msg.linear.x = 0.0;
+          msg.linear.y = 0.0;
+          msg.linear.z = 0.0;
+
+          msg.angular.x = 0.0;
+          msg.angular.y = 0.0;
+          msg.angular.z = 0.0;
+
+          flyFwdBwd_pub.publish(msg);
+        }
+      }
     }
   	ROS_INFO("Z coord. is: [%f]", point.z);
   }
@@ -52,6 +83,8 @@ private:
   ros::NodeHandle n; 
   ros::Publisher flyFwdBwd_pub;
   ros::Subscriber sub;
+  float actualPos;
+  bool firstTime;
 
 };//End of class SubscribeAndPublish
 
