@@ -32,7 +32,7 @@ public:
     {
       float diff = 0.0;
       diff = point.y - actualPos;
-      if(diff > 0.01) // fly up
+      if(diff > 0.0) // fly up
       {
         msg.linear.x = 0.0;
         msg.linear.y = 0.0;
@@ -48,7 +48,7 @@ public:
       }
       else
       {
-        if(diff < -0.01) // fly down
+        if(diff < 0.0) // fly down
         {
           msg.linear.x = 0.0;
           msg.linear.y = 0.0;
