@@ -24,6 +24,12 @@
 	/>
 
 	<node
+		name = "droneFlyUpDown"
+		pkg = "ROS_drone_hand_control"
+		type = "droneFlyUpDown" 
+	/>
+
+	<node
 		name = "droneFlyFwdBwd"
 		pkg = "ROS_drone_hand_control"
 		type = "droneFlyFwdBwd" 

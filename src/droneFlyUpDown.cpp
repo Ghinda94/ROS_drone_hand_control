@@ -16,75 +16,45 @@ public:
     //Topic you want to subscribe
     sub = n.subscribe("left_hand_joint", 1000, &SubscribeAndPublish::callback, this);
 
-    firstTime = true;
   }
 
   void callback(const geometry_msgs::Point &point)
   {
     geometry_msgs::Twist msg;
-
-    if(firstTime)
+    if(point.x > 0.2) // fly up
     {
-      actualPos = point.y;
-      firstTime = false;
+      msg.linear.x = 0.0;
+      msg.linear.y = 0.0;
+      msg.linear.z = 1.0;
+
+      msg.angular.x = 0.0;
+      msg.angular.y = 0.0;
+      msg.angular.z = 0.0;
+
+      flyUpDown_pub.publish(msg);
     }
     else
     {
-      float diff = 0.0;
-      diff = point.y - actualPos;
-      if(diff > 0.1) // fly up
+      if(point.x < -0.0) // fly down
       {
         msg.linear.x = 0.0;
         msg.linear.y = 0.0;
-        msg.linear.z = 1.0;
+        msg.linear.z = -1.0;
 
         msg.angular.x = 0.0;
         msg.angular.y = 0.0;
         msg.angular.z = 0.0;
 
         flyUpDown_pub.publish(msg);
-
-        actualPos = point.y;
-      }
-      else
-      {
-        if(diff < -0.1) // fly down
-        {
-          msg.linear.x = 0.0;
-          msg.linear.y = 0.0;
-          msg.linear.z = -1.0;
-
-          msg.angular.x = 0.0;
-          msg.angular.y = 0.0;
-          msg.angular.z = 0.0;
-
-          flyUpDown_pub.publish(msg);
-
-          actualPos = point.y;
-        }
-        else // stop!
-        {
-          msg.linear.x = 0.0;
-          msg.linear.y = 0.0;
-          msg.linear.z = 0.0;
-
-          msg.angular.x = 0.0;
-          msg.angular.y = 0.0;
-          msg.angular.z = 0.0;
-
-          flyUpDown_pub.publish(msg);
-        }
       }
     }
-  	ROS_INFO("Y coord. is: [%f]", point.z);
+  	ROS_INFO("X coord. is: [%f]", point.x);
   }
 
 private:
   ros::NodeHandle n; 
   ros::Publisher flyUpDown_pub;
   ros::Subscriber sub;
-  float actualPos;
-  bool firstTime;
 
 };//End of class SubscribeAndPublish
 
