@@ -36,7 +36,7 @@ public:
     }
     else
     {
-      if(point.x > 0.4) // CW rotation
+      if(point.x > 0.0) // CW rotation
       {
         msg.linear.x = 0.0;
         msg.linear.y = 0.0;
