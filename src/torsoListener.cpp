@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 
 		try
 		{
-			listener.lookupTransform("/torso_2", "/openni_depth_frame",ros::Time(0), transform_torso);
+			listener.lookupTransform("/torso_1", "/openni_depth_frame",ros::Time(0), transform_torso);
 		}
 		catch (tf::TransformException &ex) 
 	    {

@@ -41,6 +41,8 @@ int main(int argc, char **argv)
   			msg.angular.z = 0.0;
 
   			droneKeyBoardControl_pub.publish(msg);
+
+        loop_rate.sleep();
   			break;
   		}
   		case 's': // fly backward
@@ -54,6 +56,8 @@ int main(int argc, char **argv)
   			msg.angular.z = 0.0;
 
   			droneKeyBoardControl_pub.publish(msg);
+
+        loop_rate.sleep();
   			break;
   		}
   		case 'a': // fly to left

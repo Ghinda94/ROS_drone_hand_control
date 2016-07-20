@@ -1,0 +1,27 @@
+<launch>
+
+	<node
+		name = "torsoListener"
+		pkg = "ROS_drone_hand_control"
+		type = "torsoListener" 
+	/>
+	
+	<node
+		name = "rightHandJointListener"
+		pkg = "ROS_drone_hand_control"
+		type = "rightHandJointListener" 
+	/>
+
+	<node
+		name = "droneHandControlTakeoffAndLand"
+		pkg = "ROS_drone_hand_control"
+		type = "droneHandControlTakeoffAndLand" 
+	/>
+
+	<node
+		name = "droneFlyFwdBwd"
+		pkg = "ROS_drone_hand_control"
+		type = "droneFlyFwdBwd" 
+	/>
+
+</launch>

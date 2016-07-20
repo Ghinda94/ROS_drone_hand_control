@@ -10,31 +10,36 @@ class SubscribeAndPublish
 public:
   SubscribeAndPublish()
   {
+
+    firstTime = true;
+
     //Topic you want to publish
     flyFwdBwd_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
 
     //Topic you want to subscribe
-    sub = n.subscribe("torso_joint", 1000, &SubscribeAndPublish::callback, this);
+    sub = n.subscribe("right_hand_joint", 1000, &SubscribeAndPublish::callback, this);
 
-    firstTime = true;
   }
 
   void callback(const geometry_msgs::Point &point)
   {
+    
     geometry_msgs::Twist msg;
+    ros::Rate loop_rate(100);
 
-    if(firstTime)
-    {
-      actualPos = point.z;
-      firstTime = false;
-    }
-    else
-    {
-      float diff = 0.0;
-      diff = point.z - actualPos;
-      if(diff > 0.01) // move forward
+    // if(firstTime)
+    // {
+    //   actualPos = point.z;
+    //   firstTime = false;
+    // }
+    // else
+    // {
+      //float diff = 0.0;
+      //diff = point.z - actualPos;
+      //if(diff > 0.05) // move forward
+      if(point.y > 0.6)
       {
-        msg.linear.x = 1.0;
+        msg.linear.x = 0.2;
         msg.linear.y = 0.0;
         msg.linear.z = 0.0;
 
@@ -43,14 +48,16 @@ public:
         msg.angular.z = 0.0;
 
         flyFwdBwd_pub.publish(msg);
+        //loop_rate.sleep();
 
-        actualPos = point.z;
+        //actualPos = point.z;
       }
       else
       {
-        if(diff < -0.01) // move backward
+        //if(diff < -0.05) // move backward
+        if(point.y < 0.0)
         {
-          msg.linear.x = -1.0;
+          msg.linear.x = -0.2;
           msg.linear.y = 0.0;
           msg.linear.z = 0.0;
 
@@ -59,8 +66,9 @@ public:
           msg.angular.z = 0.0;
 
           flyFwdBwd_pub.publish(msg);
+          //loop_rate.sleep();
 
-          actualPos = point.z;
+          //actualPos = point.z;
         }
         else // stop!
         {
@@ -73,9 +81,10 @@ public:
           msg.angular.z = 0.0;
 
           flyFwdBwd_pub.publish(msg);
+          //loop_rate.sleep();
         }
       }
-    }
+    //}
   	ROS_INFO("Z coord. is: [%f]", point.z);
   }
 
