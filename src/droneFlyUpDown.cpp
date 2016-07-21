@@ -21,11 +21,11 @@ public:
   void callback(const geometry_msgs::Point &point)
   {
     geometry_msgs::Twist msg;
-    if(point.x > 0.2) // fly up
+    if(point.y > 0.6) // fly up
     {
       msg.linear.x = 0.0;
       msg.linear.y = 0.0;
-      msg.linear.z = 0.1;
+      msg.linear.z = 0.2;
 
       msg.angular.x = 0.0;
       msg.angular.y = 0.0;
@@ -35,11 +35,23 @@ public:
     }
     else
     {
-      if(point.x < -0.0) // fly down
+      if(point.y < 0.0) // fly down
       {
         msg.linear.x = 0.0;
         msg.linear.y = 0.0;
-        msg.linear.z = -0.1;
+        msg.linear.z = -0.2;
+
+        msg.angular.x = 0.0;
+        msg.angular.y = 0.0;
+        msg.angular.z = 0.0;
+
+        flyUpDown_pub.publish(msg);
+      }
+      else // stop!
+      {
+        msg.linear.x = 0.0;
+        msg.linear.y = 0.0;
+        msg.linear.z = 0.0;
 
         msg.angular.x = 0.0;
         msg.angular.y = 0.0;
@@ -48,7 +60,7 @@ public:
         flyUpDown_pub.publish(msg);
       }
     }
-  	ROS_INFO("X coord. is: [%f]", point.x);
+  	ROS_INFO("Y coord. is: [%f]", point.x);
   }
 
 private:

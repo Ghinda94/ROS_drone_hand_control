@@ -12,9 +12,9 @@
 	/>
 
 	<node
-		name = "tfListener"
+		name = "leftHandJointListener"
 		pkg = "ROS_drone_hand_control"
-		type = "tfListener" 
+		type = "leftHandJointListener" 
 	/>
 
 	<node

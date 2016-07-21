@@ -5,7 +5,7 @@
 int main(int argc, char** argv)
 {
   
-	ros::init(argc, argv, "tfListener");
+	ros::init(argc, argv, "leftHandJointListener");
 
 	ros::NodeHandle node;
 

@@ -19,9 +19,9 @@
 	/>
 
 	<node
-		name = "droneFlyFwdBwd"
+		name = "droneFlyRightLeft"
 		pkg = "ROS_drone_hand_control"
-		type = "droneFlyFwdBwd" 
+		type = "droneFlyRightLeft" 
 	/>
 
 </launch>
