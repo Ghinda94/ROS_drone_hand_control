@@ -239,3 +239,7 @@ add_dependencies(droneTestCommands ROS_drone_hand_control_generate_messages_cpp)
 add_executable(droneFlyRightLeft src/droneFlyRightLeft.cpp)
 target_link_libraries(droneFlyRightLeft ${catkin_LIBRARIES})
 add_dependencies(droneFlyRightLeft ROS_drone_hand_control_generate_messages_cpp)
+
+add_executable(droneStop src/droneStop.cpp)
+target_link_libraries(droneStop ${catkin_LIBRARIES})
+add_dependencies(droneStop ROS_drone_hand_control_generate_messages_cpp)

@@ -2,6 +2,7 @@
 #include <std_msgs/Empty.h>
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/Point.h>
+#include <std_msgs/String.h>
 #include <iostream>
 #include <cmath>
 
@@ -12,6 +13,8 @@ public:
   {   
       //Topic you want to publish
       rotate_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
+
+      stopRight = n.advertise<std_msgs::String>("stop_right_hand", 1000);
 
       //Topic you want to subscribe
       sub = n.subscribe("left_hand_joint", 1000, &SubscribeAndPublish::callback, this);
@@ -24,8 +27,16 @@ public:
 
     ros::Rate loop_rate(10);
 
+    std::stringstream ss;
+    std_msgs::String s;
+
+
     if(point.x < -0.2) // CCW rotation
     {
+      ss << "go";
+      s.data = ss.str();
+      stopRight.publish(s);
+
       msg.linear.x = 0.0;
       msg.linear.y = 0.0;
       msg.linear.z = 0.0;
@@ -40,6 +51,10 @@ public:
     {
       if(point.x > 0.4) // CW rotation
       {
+        ss << "go";
+        s.data = ss.str();
+        stopRight.publish(s);
+
         msg.linear.x = 0.0;
         msg.linear.y = 0.0;
         msg.linear.z = 0.0;
@@ -61,6 +76,10 @@ public:
         msg.angular.z = 0.0;
 
         rotate_pub.publish(msg);
+
+        ss << "stop";
+        s.data = ss.str();
+        stopRight.publish(s);
       }
     }
   	ROS_INFO("X coord. is: [%f]", point.x);
@@ -70,6 +89,7 @@ private:
   ros::NodeHandle n; 
   ros::Publisher rotate_pub;
   ros::Subscriber sub;
+  ros::Publisher stopRight;
 
 };//End of class SubscribeAndPublish
 

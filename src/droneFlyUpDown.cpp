@@ -25,7 +25,7 @@ public:
     {
       msg.linear.x = 0.0;
       msg.linear.y = 0.0;
-      msg.linear.z = 0.2;
+      msg.linear.z = 0.5;
 
       msg.angular.x = 0.0;
       msg.angular.y = 0.0;
@@ -39,7 +39,7 @@ public:
       {
         msg.linear.x = 0.0;
         msg.linear.y = 0.0;
-        msg.linear.z = -0.2;
+        msg.linear.z = -0.5;
 
         msg.angular.x = 0.0;
         msg.angular.y = 0.0;
@@ -60,7 +60,7 @@ public:
         flyUpDown_pub.publish(msg);
       }
     }
-  	ROS_INFO("Y coord. is: [%f]", point.x);
+  	ROS_INFO("Y coord. is: [%f]", point.y);
   }
 
 private:
