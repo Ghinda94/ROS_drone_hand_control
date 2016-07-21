@@ -54,15 +54,18 @@ public:
       }
       else // stop!
       {
-        msg.linear.x = 0.0;
-        msg.linear.y = 0.0;
-        msg.linear.z = 0.0;
+        if(point.x < 0.2 && point.x > -0.4 && point.y < 0.6 && point.y > 0.0)
+        {
+          msg.linear.x = 0.0;
+          msg.linear.y = 0.0;
+          msg.linear.z = 0.0;
 
-        msg.angular.x = 0.0;
-        msg.angular.y = 0.0;
-        msg.angular.z = 0.0;
+          msg.angular.x = 0.0;
+          msg.angular.y = 0.0;
+          msg.angular.z = 0.0;
 
-        flyRightLeft_pub.publish(msg);
+          flyRightLeft_pub.publish(msg);
+        }
       }
     }
   	ROS_INFO("X coord. is: [%f]", point.x);

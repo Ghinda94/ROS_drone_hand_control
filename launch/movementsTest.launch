@@ -5,11 +5,11 @@
 		pkg = "ROS_drone_hand_control"
 		type = "torsoListener" 
 	/>
-	
+
 	<node
-		name = "rightHandJointListener"
+		name = "leftHandJointListener"
 		pkg = "ROS_drone_hand_control"
-		type = "rightHandJointListener" 
+		type = "leftHandJointListener" 
 	/>
 
 	<node
@@ -19,9 +19,9 @@
 	/>
 
 	<node
-		name = "droneFlyRightLeft"
+		name = "droneRotate"
 		pkg = "ROS_drone_hand_control"
-		type = "droneFlyRightLeft" 
+		type = "droneRotate" 
 	/>
 
 </launch>
