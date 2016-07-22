@@ -42,5 +42,11 @@
 		type = "droneFlyRightLeft" 
 	/>
 
+	<node
+		name = "droneStop"
+		pkg = "ROS_drone_hand_control"
+		type = "droneStop"
+	/>
+
 
 </launch>

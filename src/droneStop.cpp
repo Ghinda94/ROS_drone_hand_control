@@ -11,6 +11,7 @@ class Subscribe_1
 public:
 	Subscribe_1()
 	{
+		stop = true;
 		sub = n.subscribe("stop_right_hand", 1000, &Subscribe_1::callback, this);
 	}
 
@@ -46,6 +47,7 @@ class Subscribe_2
 public:
 	Subscribe_2()
 	{
+		stop = true;
 		sub = n.subscribe("stop_left_hand", 1000, &Subscribe_2::callback, this);
 	}
 
@@ -81,6 +83,8 @@ int main(int argc, char **argv)
   //Initiate ROS
   ros::init(argc, argv, "dorneStop");
 
+  ros::NodeHandle n;
+
   //Create an object of class SubscribeAndPublish that will take care of everything
   Subscribe_1 sub_1;
 
@@ -88,12 +92,26 @@ int main(int argc, char **argv)
 
   ros::Rate loop_rate(10);
 
+  ros::Publisher stop_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
+
   while (ros::ok())
   {
 
 	if(sub_1.getStop() == true && sub_2.getStop() == true)
 	{
 		ROS_INFO("STOP!");
+
+		geometry_msgs::Twist msg;
+
+		msg.linear.x = 0.0;
+	    msg.linear.y = 0.0;
+	    msg.linear.z = 0.0;
+
+	    msg.angular.x = 0.0;
+	    msg.angular.y = 0.0;
+	    msg.angular.z = 0.0;
+
+	    stop_pub.publish(msg);
 	}
 	else
 	{

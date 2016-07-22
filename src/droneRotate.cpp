@@ -67,15 +67,15 @@ public:
       }
       else // stop!
       {
-        msg.linear.x = 0.0;
-        msg.linear.y = 0.0;
-        msg.linear.z = 0.0;
+        // msg.linear.x = 0.0;
+        // msg.linear.y = 0.0;
+        // msg.linear.z = 0.0;
 
-        msg.angular.x = 0.0;
-        msg.angular.y = 0.0;
-        msg.angular.z = 0.0;
+        // msg.angular.x = 0.0;
+        // msg.angular.y = 0.0;
+        // msg.angular.z = 0.0;
 
-        rotate_pub.publish(msg);
+        // rotate_pub.publish(msg);
 
         ss << "stop";
         s.data = ss.str();
