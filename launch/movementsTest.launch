@@ -13,6 +13,12 @@
 	/>
 
 	<node
+		name = "rightHandJointListener"
+		pkg = "ROS_drone_hand_control"
+		type = "rightHandJointListener" 
+	/>
+
+	<node
 		name = "droneHandControlTakeoffAndLand"
 		pkg = "ROS_drone_hand_control"
 		type = "droneHandControlTakeoffAndLand" 
@@ -24,5 +30,17 @@
 		type = "droneRotate" 
 	/>
 	
+	<node
+		name = "droneFlyFwdBwd"
+		pkg = "ROS_drone_hand_control"
+		type = "droneFlyFwdBwd" 
+	/>
+
+	<node
+		name = "droneFlyRightLeft"
+		pkg = "ROS_drone_hand_control"
+		type = "droneFlyRightLeft" 
+	/>
+
 
 </launch>

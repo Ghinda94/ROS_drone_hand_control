@@ -17,6 +17,22 @@ public:
 	void callback(const std_msgs::String::ConstPtr& msg)
   	{
   		ROS_INFO("I heard 1 : [%s]", msg->data.c_str());
+
+  		if(msg->data == "stop") 
+  		{
+  			stop = true;
+  		}
+  		else
+  		{
+  			stop = false;
+  		}
+
+  		ROS_INFO("Stop 1 : [%d]", stop);
+  	}
+
+  	bool getStop()
+  	{
+  		return stop;
   	}
 
 private:
@@ -36,6 +52,22 @@ public:
 	void callback(const std_msgs::String::ConstPtr& msg)
   	{
   		ROS_INFO("I heard 2 : [%s]", msg->data.c_str());
+
+  		if(msg->data == "stop")
+  		{
+  			stop = true;
+  		}
+  		else
+  		{
+  			stop = false;
+  		}
+
+  		ROS_INFO("Stop 2 : [%d]", stop);
+  	}
+
+  	bool getStop()
+  	{
+  		return stop;
   	}
 
 private:
@@ -54,7 +86,22 @@ int main(int argc, char **argv)
 
   Subscribe_2 sub_2;
 
-  ros::spin();
+  ros::Rate loop_rate(10);
+
+  while (ros::ok())
+  {
+
+	if(sub_1.getStop() == true && sub_2.getStop() == true)
+	{
+		ROS_INFO("STOP!");
+	}
+	else
+	{
+	  	ROS_INFO("go");
+	}
+	ros::spinOnce();
+	loop_rate.sleep();
+  }
 
   return 0;
 }
